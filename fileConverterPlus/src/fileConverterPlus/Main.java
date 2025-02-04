@@ -19,6 +19,8 @@ public class Main {
 		 * frame.getContentPane().setBackground(new Color(93, 93, 93));
 		 */
 		
+		//Added a comment to check if rebranching worked
+		
 		EntryFrame frame = new EntryFrame();
 	}
 
