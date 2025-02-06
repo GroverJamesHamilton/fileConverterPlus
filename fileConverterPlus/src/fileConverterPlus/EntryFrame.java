@@ -3,11 +3,14 @@ package fileConverterPlus;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class EntryFrame extends JFrame  implements ActionListener{
 	
@@ -52,6 +55,16 @@ public class EntryFrame extends JFrame  implements ActionListener{
 		if(e.getSource() == browseButton) {
 			
 			JFileChooser fileChooser = new JFileChooser();
+
+			//fileChooser.setCurrentDirectory(new File("."));
+			
+			int response = fileChooser.showOpenDialog(null);
+			
+			if(response == JFileChooser.APPROVE_OPTION) {
+				
+				File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+				//System.out.println(file);
+			}
 			
 		}
 		
