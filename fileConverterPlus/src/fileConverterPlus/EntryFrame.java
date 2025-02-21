@@ -35,8 +35,11 @@ public class EntryFrame extends JFrame  implements ActionListener{
 		this.setSize(500,500);
 		this.setVisible(true);
 		
+		
+		//Icon Image (Top corner)
 		ImageIcon image = new ImageIcon("ruler.png");
 		this.setIconImage(image.getImage());
+		
 		this.getContentPane().setBackground(new Color(93, 93, 93));
 		
 		this.add(button);
@@ -54,17 +57,16 @@ public class EntryFrame extends JFrame  implements ActionListener{
 		
 		if(e.getSource() == browseButton) {
 			
-			JFileChooser fileChooser = new JFileChooser();
-
+			//JFileChooser fileChooser = new JFileChooser();
 			//fileChooser.setCurrentDirectory(new File("."));
 			
-			int response = fileChooser.showOpenDialog(null);
-			
+			//int response = fileChooser.showOpenDialog(null);
+			/*
 			if(response == JFileChooser.APPROVE_OPTION) {
 				
 				File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
 				//System.out.println(file);
-			}
+			} */
 			
 		}
 		
