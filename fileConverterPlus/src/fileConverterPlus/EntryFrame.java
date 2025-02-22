@@ -9,6 +9,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -25,16 +27,27 @@ public class EntryFrame extends JFrame  implements ActionListener{
 		button.setFocusable(false);
 		button.addActionListener(this);
 		
-		browseButton.setBounds(175,200,150,40);
+		browseButton.setBounds(175,275,150,40);
 		browseButton.setFocusable(false);
 		browseButton.addActionListener(this);
 		
 		this.setTitle("Entry Frame");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setResizable(false);
+		this.setResizable(false);
 		this.setSize(500,500);
 		this.setVisible(true);
 		
+		//The label where files will be dropped
+		JLabel dropFilesLabel = new JLabel("Drop File/s Here", SwingConstants.CENTER);
+		dropFilesLabel.setFont(new java.awt.Font("Times New Roman", 1, 34));
+		dropFilesLabel.setBounds(100,90,300,170);
+		//dropFilesLabel.setHorizontalTextPosition(JLabel.CENTER);
+		//dropFilesLabel.setVerticalTextPosition(JLabel.TOP);
+		//dropFilesLabel.setText("Drop File Here");
+		dropFilesLabel.setBackground(Color.GRAY);
+		dropFilesLabel.setForeground(new java.awt.Color(0,0,0));
+		dropFilesLabel.setOpaque(true);
+			
 		
 		//Icon Image (Top corner)
 		ImageIcon image = new ImageIcon("ruler.png");
@@ -44,6 +57,10 @@ public class EntryFrame extends JFrame  implements ActionListener{
 		
 		this.add(button);
 		this.add(browseButton);
+		this.add(dropFilesLabel);
+		
+		//Initially sets frame in middle of screen
+		this.setLocationRelativeTo(null); 
 	}
 
 	@Override
