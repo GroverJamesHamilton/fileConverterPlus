@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 public class Main {
 
 	public static void main(String[] args) {
-		
+
 		/*
 		 * JFrame frame = new JFrame(); frame.setTitle("Title here");
 		 * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -18,7 +18,7 @@ public class Main {
 		 * frame.setIconImage(image.getImage());
 		 * frame.getContentPane().setBackground(new Color(93, 93, 93));
 		 */
-		
+
 		EntryFrame frame = new EntryFrame();
 	}
 
