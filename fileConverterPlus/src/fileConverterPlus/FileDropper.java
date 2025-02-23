@@ -13,6 +13,7 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,42 +34,52 @@ FileDropper(String name) {
 	
 }
 
-boolean inside = false;
-
 @Override
 public void dragEnter(DropTargetDragEvent dtde) {
-	// TODO Auto-generated method stub
-	if(!inside) {
-		inside = true;
-		System.out.println("Inside");
-	}
 }
-
 @Override
 public void dragOver(DropTargetDragEvent dtde) {
-	// TODO Auto-generated method stub
-	
 }
-
 @Override
 public void dropActionChanged(DropTargetDragEvent dtde) {
-	// TODO Auto-generated method stub
-	
 }
-
 @Override
 public void dragExit(DropTargetEvent dte) {
-	// TODO Auto-generated method stub
-	
 }
 
 boolean dropped = false;
 
+//Lists all file paths in a Array
+List listAllPaths(List<File> files) {	
+	List allPaths = new ArrayList();
+	File file;
+	Iterator iter = files.iterator();
+	while (iter.hasNext()) {
+		
+		file = (File) iter.next();
+		
+		if(file.isFile()) {
+			allPaths.add(file.getPath());
+			System.out.println(file.getName());
+		}
+		
+		if(file.isDirectory()) {
+
+			//String directoryPath = file.getPath();
+			File directory = new File(file.getPath());
+			File[] directoryFiles = directory.listFiles();
+			List<File> directoryList = Arrays.asList(directoryFiles);
+			allPaths.add(listAllPaths(directoryList));
+		}
+	}
+	
+	return allPaths;
+}
+
+// If any file or object is dropped within the JLabel
 @Override
 public void drop(DropTargetDropEvent droppedFile) {
-	// If any file or object is dropped within the JLabel
-		System.out.println("Dropped");
-		
+
 		droppedFile.acceptDrop(DnDConstants.ACTION_COPY);
 		Transferable transferredFiles = droppedFile.getTransferable();
 		DataFlavor[] flavors = transferredFiles.getTransferDataFlavors();
@@ -77,17 +88,10 @@ public void drop(DropTargetDropEvent droppedFile) {
 			
 			try {
 				
-				if (flavor.equals(DataFlavor.javaFileListFlavor)) {
-					
-				List files = (List) transferredFiles.getTransferData(flavor);
+				if (flavor.equals(DataFlavor.javaFileListFlavor)) {	
+				List<File> files = (List<File>) transferredFiles.getTransferData(flavor);
 				
-				Iterator iter = files.iterator();
-				
-				while (iter.hasNext()) {
-					
-					File file = (File) iter.next();
-					System.out.println(file.getName());
-				}
+				listAllPaths(files);
 				
 				}
 				
