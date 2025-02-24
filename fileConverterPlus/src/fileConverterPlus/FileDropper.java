@@ -2,6 +2,7 @@ package fileConverterPlus;
 
 import java.awt.Color;
 
+
 import java.awt.Font;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -22,31 +23,30 @@ import javax.swing.SwingConstants;
 
 public class FileDropper extends JLabel implements DropTargetListener{
 
-	FileDropper(String name) {
+	FileDropper(String title) {
 
 		new DropTarget(this, DnDConstants.ACTION_COPY, this);
-
+		this.setHorizontalAlignment(SwingConstants.CENTER); 
+		//this.setVerticalTextPosition(CENTER);   
+		this.setText(title);
 		this.setSize(300,170);
 		this.setBackground(new java.awt.Color(240,240,230));
 		this.setOpaque(true);
 		this.setForeground(new java.awt.Color(0,0,0));
-		setFont(new java.awt.Font("Times New Roman", Font.BOLD, 18));	
+		setFont(new java.awt.Font("Times New Roman", Font.BOLD, 22));
 	}
 
 	@Override
-	public void dragEnter(DropTargetDragEvent dtde) {
-	}
+	public void dragEnter(DropTargetDragEvent dtde) {}
 	@Override
-	public void dragOver(DropTargetDragEvent dtde) {
-	}
+	public void dragOver(DropTargetDragEvent dtde) {}
 	@Override
-	public void dropActionChanged(DropTargetDragEvent dtde) {
-	}
+	public void dropActionChanged(DropTargetDragEvent dtde) {}
 	@Override
-	public void dragExit(DropTargetEvent dte) {
-	}
+	public void dragExit(DropTargetEvent dte) {}
 
 	//Lists all file paths in a Array
+	//A bit wonky function due to many convertion steps
 	List listAllPaths(List<File> files) {	
 		List allPaths = new ArrayList();
 		File file;

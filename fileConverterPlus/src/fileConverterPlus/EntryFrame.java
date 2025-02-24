@@ -22,41 +22,41 @@ public class EntryFrame extends JFrame implements ActionListener{
 	
 	//Temporary button to trigger a new window
 	JButton button = new JButton("New Window");
-	//Button to trigger FileChooser
-	JButton browseButton = new JButton("Browse");
-	FileDropper fileDropper = new FileDropper("Drop File/s Here");
 
-	int entryFrameWidth = 600;
-	int entryFrameHeight = 500;
+	FileDropper fileDropper = new FileDropper("Drop File/s Here");
+	//Button to trigger FileChooser
+	CustomButton browseButton = new CustomButton("Browse", 35, 120);
+	
+	private int width = 600;
+	private int height = 500;
 
 	EntryFrame() {
-
+		
 		button.setBounds(20,400,200,40);
 		button.setFocusable(false);
 		button.addActionListener(this);
+		
+		fileDropper.setLocation((width - fileDropper.getWidth())/2,75);
 
-		browseButton.setBounds(175,275,150,40);
-		//browseButton.setBorder(new RoundedBorder(10));
-		browseButton.setFocusable(false);
+		browseButton.setLocation((width - fileDropper.getWidth())/2, 250);
+		browseButton.setVisible(true);
 		browseButton.addActionListener(this);
-
-		fileDropper.setLocation((entryFrameWidth - fileDropper.getWidth())/2,75);
-
+		
 		this.setTitle("Entry Frame");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.setSize(entryFrameWidth, entryFrameHeight);
+		this.setSize(width, height);
 		this.setVisible(true);
 
 		//Icon Image (Top corner)
 		ImageIcon image = new ImageIcon("ruler.png");
 		this.setIconImage(image.getImage());
-
-		this.getContentPane().setBackground(new Color(93, 93, 93));
-
+		
 		this.add(button);
 		this.add(browseButton);
 		this.add(fileDropper);
+		
+		this.getContentPane().setBackground(new Color(93, 93, 93));
 
 		//Initially sets frame in middle of screen
 		this.setLocationRelativeTo(null); 
