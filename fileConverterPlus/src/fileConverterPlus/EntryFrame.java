@@ -20,12 +20,13 @@ public class EntryFrame extends JFrame implements ActionListener{
 
 	JFrame frame = new JFrame();
 	
+	private Color color = new Color(93, 93, 93);
 	//Temporary button to trigger a new window
 	JButton button = new JButton("New Window");
 
 	FileDropper fileDropper = new FileDropper("Drop File/s Here");
 	//Button to trigger FileChooser
-	CustomButton browseButton = new CustomButton("Browse", 35, 120);
+	CustomButton browseButton = new CustomButton("Browse", color, 35, 120);
 	
 	private int width = 600;
 	private int height = 500;
@@ -56,7 +57,7 @@ public class EntryFrame extends JFrame implements ActionListener{
 		this.add(browseButton);
 		this.add(fileDropper);
 		
-		this.getContentPane().setBackground(new Color(93, 93, 93));
+		this.getContentPane().setBackground(color);
 
 		//Initially sets frame in middle of screen
 		this.setLocationRelativeTo(null); 

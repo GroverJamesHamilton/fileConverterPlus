@@ -1,0 +1,12 @@
+List of working methods that could be rewritten to simplify, clarify etc:
+
+FileDropper.java:
+
+listAllPaths: Recursive function, currently returns all file paths of dropped files, even in subfolders
+Problem: Takes in List() (Raw type), converts each file in List to File(),
+if file is a folder (Directory) all files in it are made into a list and the method is recursively called again.
+Too many conversion steps
+
+RoundedBorder.java:
+
+paintBorder: Color from JFrame is not inherited, defined the color again before changing paint color

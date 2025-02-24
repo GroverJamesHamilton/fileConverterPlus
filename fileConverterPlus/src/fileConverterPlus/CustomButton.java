@@ -1,5 +1,7 @@
 package fileConverterPlus;
 
+import java.awt.Color;
+
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -7,30 +9,32 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
-public class CustomButton extends JButton implements Border {
+public class CustomButton extends JButton {
 
 	private int radius = 10; //The radius for the rounded edges of the button
 	private int height = 50; 
 	private int width = 150;
 	private String title;
+	private Color color;
 	
 	//Default constructor
-	CustomButton(String title){
+	CustomButton(String title, Color color){
 		this.title = title;
-		
+		this.color = color;
 		CustomButtonHelpFunction();
 	}
 	
-	CustomButton(String title, int height, int width){
+	CustomButton(String title, Color color, int height, int width){
 		this.title = title;
+		this.color = color;
 		this.height = height;
 		this.width = width;
-		
 		CustomButtonHelpFunction();
 	}
 	
-	CustomButton(String title, int height, int width, int radius){
+	CustomButton(String title, Color color, int height, int width, int radius){
 		this.title = title;
+		this.color = color;
 		this.height = height;
 		this.width = width;
 		this.radius = radius;
@@ -38,30 +42,18 @@ public class CustomButton extends JButton implements Border {
 		CustomButtonHelpFunction();
 	}
 	
+	RoundedBorder roundEdges = new RoundedBorder(10, color);
+	
 	private void CustomButtonHelpFunction() {
 		
 		this.setSize(width, height);
+		this.setBorder(roundEdges);
 		this.setText(title);
 		this.setFocusable(false);
 		//this.setOpaque(false);
 		//this.setFocusPainted(true);
 		//this.setBorderPainted(true);
 		//this.setContentAreaFilled(true);
+		;
 	}
-	
-	@Override
-	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-		g.drawRoundRect(x, y, width-1, height-1, radius, radius);
-	}
-
-	@Override
-	public Insets getBorderInsets(Component c) {
-		return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
-	}
-
-	@Override
-	public boolean isBorderOpaque() {
-		return true;
-	}
-
 }

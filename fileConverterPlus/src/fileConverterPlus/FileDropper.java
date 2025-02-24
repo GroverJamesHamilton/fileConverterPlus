@@ -26,8 +26,7 @@ public class FileDropper extends JLabel implements DropTargetListener{
 	FileDropper(String title) {
 
 		new DropTarget(this, DnDConstants.ACTION_COPY, this);
-		this.setHorizontalAlignment(SwingConstants.CENTER); 
-		//this.setVerticalTextPosition(CENTER);   
+		this.setHorizontalAlignment(SwingConstants.CENTER);  
 		this.setText(title);
 		this.setSize(300,170);
 		this.setBackground(new java.awt.Color(240,240,230));
@@ -46,7 +45,7 @@ public class FileDropper extends JLabel implements DropTargetListener{
 	public void dragExit(DropTargetEvent dte) {}
 
 	//Lists all file paths in a Array
-	//A bit wonky function due to many convertion steps
+	//A bit wonky function due to many conversion steps
 	List listAllPaths(List<File> files) {	
 		List allPaths = new ArrayList();
 		File file;
