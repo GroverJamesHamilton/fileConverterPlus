@@ -22,9 +22,20 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class FileDropper extends JLabel implements DropTargetListener{
-
+	
+	private List<FileDropListener> listeners = new ArrayList();
+    public void addListener(FileDropListener toAdd) {
+        listeners.add(toAdd);
+    }
+    public void acceptedFiles() {
+        System.out.println("Files are accepted");
+    
+        for (FileDropListener listener : listeners)
+            listener.acceptedFilesDropped();
+    }
+	
 	FileDropper(String title) {
-
+		
 		new DropTarget(this, DnDConstants.ACTION_COPY, this);
 		this.setHorizontalAlignment(SwingConstants.CENTER);  
 		this.setText(title);
@@ -67,6 +78,7 @@ public class FileDropper extends JLabel implements DropTargetListener{
 				allPaths.add(listAllPaths(directoryList));
 			}
 		}
+		acceptedFiles();
 		return allPaths;
 	}
 
@@ -82,7 +94,7 @@ public class FileDropper extends JLabel implements DropTargetListener{
 			try {		
 				if (flavor.equals(DataFlavor.javaFileListFlavor)) {	
 					List<File> files = (List<File>) transferredFiles.getTransferData(flavor);
-					listAllPaths(files);			
+					listAllPaths(files);
 				}			
 			} catch (Exception e) { System.out.println("Fix this exception later");	}			
 		}

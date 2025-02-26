@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.print.attribute.standard.MediaSize.Other;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -16,10 +17,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class EntryFrame extends JFrame implements ActionListener{
+public class EntryFrame extends JFrame implements ActionListener, FileDropListener{
 
 	JFrame frame = new JFrame();
-	
 	private Color color = new Color(93, 93, 93);
 	//Temporary button to trigger a new window
 	JButton button = new JButton("New Window");
@@ -31,14 +31,15 @@ public class EntryFrame extends JFrame implements ActionListener{
 	private int width = 600;
 	private int height = 500;
 
-	EntryFrame() {
+	public EntryFrame() {
 		
 		button.setBounds(20,400,200,40);
 		button.setFocusable(false);
 		button.addActionListener(this);
 		
 		fileDropper.setLocation((width - fileDropper.getWidth())/2,75);
-
+		fileDropper.addListener(this);
+		
 		browseButton.setLocation((width - fileDropper.getWidth())/2, 250);
 		browseButton.setVisible(true);
 		browseButton.addActionListener(this);
@@ -87,9 +88,11 @@ public class EntryFrame extends JFrame implements ActionListener{
 				//File files = new File(fileChooser.getSelectedFile().getAbsolutePath());
 				System.out.println(files[0].getPath());
 			} 
-
 		}
-
 	}
 
+	@Override
+	public void acceptedFilesDropped() {
+		System.out.println("Dropped");
+	}
 }
