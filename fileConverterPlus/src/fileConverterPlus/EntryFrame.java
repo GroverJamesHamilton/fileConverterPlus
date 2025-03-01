@@ -68,9 +68,7 @@ public class EntryFrame extends JFrame implements ActionListener, FileDropListen
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == button) {
-
 			MainFrame main = new MainFrame();
-
 		}
 
 		if(e.getSource() == browseButton) {
@@ -93,6 +91,7 @@ public class EntryFrame extends JFrame implements ActionListener, FileDropListen
 
 	@Override
 	public void acceptedFilesDropped() {
-		System.out.println("Dropped");
+		//MainFrame main = new MainFrame();
+		//this.dispose();
 	}
 }

@@ -3,6 +3,7 @@ package fileConverterPlus;
 import java.awt.Color;
 
 
+
 import java.awt.Font;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -45,6 +46,20 @@ public class FileDropper extends JLabel implements DropTargetListener{
 		this.setForeground(new java.awt.Color(0,0,0));
 		setFont(new java.awt.Font("Times New Roman", Font.BOLD, 22));
 	}
+	
+	//Getting the file type in string format,
+	//Credit to https://www.baeldung.com/java-file-extension
+	String getFileType(String fileName) {
+		
+		int dotIndex = fileName.lastIndexOf(".");
+	    if (dotIndex >= 0) {
+	        return fileName.substring(dotIndex + 1);
+	    }
+	    else
+	    {
+	    	return " ";
+	    }
+	}
 
 	@Override
 	public void dragEnter(DropTargetDragEvent dtde) {}
@@ -57,29 +72,30 @@ public class FileDropper extends JLabel implements DropTargetListener{
 
 	//Lists all file paths in a Array
 	//A bit wonky function due to many conversion steps
-	List listAllPaths(List<File> files) {	
-		List allPaths = new ArrayList();
+	List<File> listImgPaths(List<File> files) {	
+		List<File> imgPaths = new ArrayList<File>();
 		File file;
-		Iterator iter = files.iterator();
+		Iterator<File> iter = files.iterator();
 		while (iter.hasNext()) {
 
 			file = (File) iter.next();
 
-			if(file.isFile()) {
-				allPaths.add(file.getPath());
-				System.out.println(file.getName());
+			if(file.isFile() && 
+					getFileType(file.getName()).equals("png") || 
+					getFileType(file.getName()).equals("jpg")) {
+				
+				imgPaths.add(file);
+				//System.out.println(imgPaths.size());
 			}
 
 			if(file.isDirectory()) {
-
 				File directory = new File(file.getPath());
 				File[] directoryFiles = directory.listFiles();
 				List<File> directoryList = Arrays.asList(directoryFiles);
-				allPaths.add(listAllPaths(directoryList));
+				imgPaths.addAll(listImgPaths(directoryList));
 			}
 		}
-		acceptedFiles();
-		return allPaths;
+		return imgPaths;
 	}
 
 	// If any file or object is dropped within the JLabel
@@ -94,7 +110,11 @@ public class FileDropper extends JLabel implements DropTargetListener{
 			try {		
 				if (flavor.equals(DataFlavor.javaFileListFlavor)) {	
 					List<File> files = (List<File>) transferredFiles.getTransferData(flavor);
-					listAllPaths(files);
+					List imgFilesPaths = listImgPaths(files);
+					
+					
+					System.out.println(imgFilesPaths.size());
+					//acceptedFiles();
 				}			
 			} catch (Exception e) { System.out.println("Fix this exception later");	}			
 		}
