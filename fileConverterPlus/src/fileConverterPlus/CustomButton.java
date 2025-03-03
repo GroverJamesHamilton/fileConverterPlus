@@ -33,16 +33,16 @@ public class CustomButton extends JButton {
 	}
 	
 	CustomButton(String title, Color color, int height, int width, int radius){
+		
 		this.title = title;
 		this.color = color;
 		this.height = height;
 		this.width = width;
 		this.radius = radius;
-		
 		CustomButtonHelpFunction();
 	}
 	
-	RoundedBorder roundEdges = new RoundedBorder(10, color);
+	RoundedBorder roundEdges = new RoundedBorder(radius, color);
 	
 	private void CustomButtonHelpFunction() {
 		

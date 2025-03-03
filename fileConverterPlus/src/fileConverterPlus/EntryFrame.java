@@ -2,10 +2,12 @@ package fileConverterPlus;
 
 import java.awt.Color;
 
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Date;
 
 import javax.print.attribute.standard.MediaSize.Other;
 import javax.swing.ImageIcon;
@@ -14,6 +16,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -92,6 +95,8 @@ public class EntryFrame extends JFrame implements ActionListener, FileDropListen
 	@Override
 	public void acceptedFilesDropped() {
 		//MainFrame main = new MainFrame();
+		
 		//this.dispose();
+		
 	}
 }
