@@ -38,7 +38,7 @@ public class FileDropper extends JLabel implements DropTargetListener, ActionLis
 	final int PANEL_WIDTH = 350;
 	final int PANEL_HEIGHT = 165;
 	final int PANEL_WIDTH_EXPANSION = 50;
-	final int PANEL_ROUND_EDGE_RADIUS = 50;
+	final int PANEL_ROUND_EDGE_RADIUS = 30;
 	final int NR_PANEL_SHAKES  = 1;
 	final String DROP_ZONE_TEXT = "Drop Image/s Here";
 	
@@ -55,17 +55,26 @@ public class FileDropper extends JLabel implements DropTargetListener, ActionLis
 	final int PANEL_SHAKE_DISTANCE = 10;
 	final int PANEL_SHAKE_VELOCITY = 30;
 	
+	//The files we pass onto the MainFrame class 
+	//when this class along with EntryFrame is shut down
+	private static List<File> imgFilesPaths;
+	
 	private List<FileDropListener> listeners = new ArrayList();
     public void addListener(FileDropListener toAdd) {
         listeners.add(toAdd);
     }
     
     public void acceptedFiles() {
-        System.out.println("Files are accepted");
+        //System.out.println("Files are accepted");
     
         for (FileDropListener listener : listeners)
             listener.acceptedFilesDropped();
     }
+    
+    public static List<File> getFiles() 
+    { 
+        return imgFilesPaths; 
+    } 
 	
 	FileDropper(String title) {
 		new DropTarget(this, DnDConstants.ACTION_COPY, this);
@@ -148,8 +157,8 @@ public class FileDropper extends JLabel implements DropTargetListener, ActionLis
 		//Anti-alising
 	    RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON );
 		qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY );
+		g2D.setRenderingHints(qualityHints);  
 		
-		g2D.setRenderingHints(qualityHints);   
 		g2D.setPaint(Color.WHITE);
 		g2D.fill(new RoundRectangle2D.Double(x, 0, PANEL_WIDTH, PANEL_HEIGHT, PANEL_ROUND_EDGE_RADIUS, PANEL_ROUND_EDGE_RADIUS));
 		g2D.setPaint(Color.BLACK);
@@ -167,7 +176,7 @@ public class FileDropper extends JLabel implements DropTargetListener, ActionLis
 			try {		
 				if (flavor.equals(DataFlavor.javaFileListFlavor)) {	
 					List<File> files = (List<File>) transferredFiles.getTransferData(flavor);
-					List imgFilesPaths = listImgPaths(files);
+					imgFilesPaths = listImgPaths(files);
 					if(imgFilesPaths.size() > 0){
 						acceptedFiles();						
 					}

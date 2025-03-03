@@ -94,9 +94,7 @@ public class EntryFrame extends JFrame implements ActionListener, FileDropListen
 
 	@Override
 	public void acceptedFilesDropped() {
-		//MainFrame main = new MainFrame();
-		
-		//this.dispose();
-		
+		MainFrame main = new MainFrame();
+		this.dispose();
 	}
 }
