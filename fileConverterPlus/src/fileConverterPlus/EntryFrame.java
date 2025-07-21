@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import javax.print.attribute.standard.MediaSize.Other;
 import javax.swing.ImageIcon;
@@ -33,6 +34,8 @@ public class EntryFrame extends JFrame implements ActionListener, FileDropListen
 	
 	private int width = 600;
 	private int height = 500;
+	
+	private List<File> chosenFilePaths;
 
 	public EntryFrame() {
 		
@@ -71,7 +74,7 @@ public class EntryFrame extends JFrame implements ActionListener, FileDropListen
 	public void actionPerformed(ActionEvent e) {
 
 		if(e.getSource() == button) {
-			MainFrame main = new MainFrame();
+			//MainFrame main = new MainFrame();
 		}
 
 		if(e.getSource() == browseButton) {
@@ -94,7 +97,9 @@ public class EntryFrame extends JFrame implements ActionListener, FileDropListen
 
 	@Override
 	public void acceptedFilesDropped() {
-		MainFrame main = new MainFrame();
+		
+		chosenFilePaths = fileDropper.getPaths();
+		MainFrame main = new MainFrame(chosenFilePaths);
 		this.dispose();
 	}
 }

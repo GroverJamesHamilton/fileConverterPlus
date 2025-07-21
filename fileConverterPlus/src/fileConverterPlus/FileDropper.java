@@ -52,6 +52,8 @@ public class FileDropper extends JLabel implements DropTargetListener, ActionLis
 	private Boolean paintComponentsInitiated = false;
 	private int textWidth, textHeight;
 	
+	private List<File> imgPaths = new ArrayList<File>();
+	
 	final int PANEL_SHAKE_DISTANCE = 10;
 	final int PANEL_SHAKE_VELOCITY = 30;
 	
@@ -75,6 +77,11 @@ public class FileDropper extends JLabel implements DropTargetListener, ActionLis
     { 
         return imgFilesPaths; 
     } 
+    
+    //Return resulting file path names
+    public List<File> getPaths(){
+    	return imgPaths;
+    }
 	
 	FileDropper(String title) {
 		new DropTarget(this, DnDConstants.ACTION_COPY, this);
@@ -113,7 +120,7 @@ public class FileDropper extends JLabel implements DropTargetListener, ActionLis
 	//Lists all file paths in a Array
 	//A bit wonky function due to many conversion steps
 	List<File> listImgPaths(List<File> files) {	
-		List<File> imgPaths = new ArrayList<File>();
+		//List<File> imgPaths = new ArrayList<File>();
 		File file;
 		Iterator<File> iter = files.iterator();
 		while (iter.hasNext()) {
@@ -123,7 +130,6 @@ public class FileDropper extends JLabel implements DropTargetListener, ActionLis
 			if(file.isFile() && 
 					getFileType(file.getName()).equals("png") || 
 					getFileType(file.getName()).equals("jpg")) {
-				
 				imgPaths.add(file);
 			}
 

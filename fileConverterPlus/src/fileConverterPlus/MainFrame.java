@@ -8,6 +8,7 @@ import java.util.List;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 //import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
 
 public class MainFrame extends JFrame {
 	
@@ -26,8 +30,10 @@ public class MainFrame extends JFrame {
 	JLabel label = new JLabel("Hello!");
 	private Color glacuous = new Color(96, 130, 182);
 
-	MainFrame(){
+	MainFrame(List<File> chosenFilePaths){
 
+		System.out.println(chosenFilePaths);
+		
 		this.setTitle("New Frame");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setResizable(false);
@@ -66,17 +72,38 @@ public class MainFrame extends JFrame {
 		panel4.setBackground(Color.magenta);
 		panel5.setBackground(Color.blue);
 		
-		panel1.setPreferredSize(new Dimension(100,100));
-		panel2.setPreferredSize(new Dimension(100,100));
+		//panel1.setPreferredSize(new Dimension(100,100));
+		//panel2.setPreferredSize(new Dimension(100,100));
 		panel3.setPreferredSize(new Dimension(100,100));
 		panel4.setPreferredSize(new Dimension(100,100));
 		panel5.setPreferredSize(new Dimension(100,100));
 		
-		this.add(panel1,BorderLayout.NORTH);
-		this.add(panel2,BorderLayout.WEST);
-		this.add(panel3,BorderLayout.EAST);
-		this.add(panel4,BorderLayout.SOUTH);
-		this.add(panel5,BorderLayout.CENTER);
+        //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        //scrollPane.setBounds(50, 30, 300, 50);
+		
+		//frame.setVisible(true);
+		//this.add(panel1,BorderLayout.NORTH);
+		//this.add(panel2,BorderLayout.WEST);
+		//this.add(panel3,BorderLayout.EAST);
+		//this.add(panel4,BorderLayout.SOUTH);
+		//this.add(panel5,BorderLayout.CENTER);
+
+		//SizeDisplayer sd1 = new SizeDisplayer("left", i);
+		
+		JTextArea fileColumn = new JTextArea("Hello----------------------------------------");
+		fileColumn.setColumns(5);
+		fileColumn.setEditable(false);
+		fileColumn.setBackground(Color.gray);
+		fileColumn.setForeground(Color.white);
+		JScrollPane scrollPane = new JScrollPane(fileColumn);
+		
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollPane, panel2);
+		splitPane.setResizeWeight(0.1);
+		splitPane.setOneTouchExpandable(false);
+		splitPane.setContinuousLayout(true);
+		
+		this.add(splitPane);
 		
 	}
 }
